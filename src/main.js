@@ -43,7 +43,6 @@ var game = new Phaser.Game(config)
   }
   
   function create () {
-    
     this.add.image(400, 300, "ground");
 
     // Initialization of the enemygroups and bulletgroups
@@ -65,9 +64,9 @@ var game = new Phaser.Game(config)
     player = this.physics.add.image(400, 350, "tankBase");
     turret = this.physics.add.image(400,350,'tankTurret');
     
-    enemygroup.createEnemy(player.x+50,player.y+50)
+    enemygroup.createEnemy(player.x+50,player.y+50,this)
     
-    enemygroup.createEnemy(player.x+100,player.y+100)
+    enemygroup.createEnemy(player.x+100,player.y+100,this)
     player.setBounce(1);
     player.setCollideWorldBounds(true);
    // this.sys.canvas.style.cursor = 'none' If you want to hide cursor

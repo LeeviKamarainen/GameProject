@@ -7,14 +7,16 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         super(scene, x, y, 'tankBase');
     }
 
-    create(x,y) {
+    create(x,y,sc) {
         this.body.reset(x+Math.random()*50,y+Math.random()*50);
         this.body.bounce = 1;
         this.tint = 0xda2525
         this.setActive(true);
         this.setVisible(true);
         this.body.setCollideWorldBounds(true);
-        turret = new Turret(game,x,y)
+        console.log(sc)
+        let turret = new Turret(sc)
+        turret.create(x,y)
     }
     
 
@@ -30,6 +32,7 @@ class Turret extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, 'tankTurret');
     }
     create(x,y) {
+        console.log(this)
         this.body.reset(x,y);
         this.tint = 0xda2525
         this.setActive(true);
@@ -57,11 +60,11 @@ class EnemyGroup extends Phaser.Physics.Arcade.Group
     })
     }  
 
-    createEnemy(x,y) {
+    createEnemy(x,y,sc) {
         const enemy = this.getFirstDead(false)
 
         if(enemy) {
-            enemy.create(x,y)
+            enemy.create(x,y,sc)
         }
     }
 
