@@ -31,11 +31,13 @@ var game = new Phaser.Game(config)
   let spacebar;
   let flag = false;
   let enemygroup;
+  let bulletwallcollider;
 
   var timevar = 0;
   var timetext;
   var score = 0;
   var scoreText;
+
 
   let updatevar = 1; // variable to use in the update function
   let speedupvar = 5 // variable to speed up the spawning of the enemies
@@ -92,6 +94,7 @@ var game = new Phaser.Game(config)
     cursors = this.input.keyboard.createCursorKeys();
     pointer = this.input.activePointer;
 
+    bulletwallcollider = this.physics.add.collider(bulletgroup,walls)
 
    // this.sys.canvas.style.cursor = 'none' If you want to hide cursor
   }
@@ -134,8 +137,8 @@ var game = new Phaser.Game(config)
     
     enemygroup.moveEnemy(player,this)
     this.physics.collide(player,walls)
-    this.physics.add.collider(powerup,player,speedUp,null,this)
-    this.physics.collide(bulletgroup,walls)
+    
+    this.physics.add.collider(powerup,player,pierceShot,null,this)
     this.physics.collide(bulletgroup,player)
     this.physics.collide(enemygroup,walls)
     this.physics.collide(enemygroup,player)

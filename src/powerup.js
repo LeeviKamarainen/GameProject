@@ -30,10 +30,23 @@ function speedUp (powerup,player) {
     currenttime = this.time.now;
     console.log(this)
     player.speed = 200;
-    player.tint = 0xfc8c03
-    playerturret.tint = 0xfc8c03
+    player.tint = 0x036bfc
+    playerturret.tint = 0x036bfc
     powerup.destroy();
     this.time.delayedCall(5000,function() {player.speed = 100
+        player.tint = 0xffffff;
+        playerturret.tint = 0xffffff;
+    
+    }, null,this) //set speed back to original after 5 seconds
+}
+
+function pierceShot (powerup,player) {
+    this.physics.world.removeCollider(bulletwallcollider) // remove the collision checker between walls and player bullets 
+    player.tint = 0x03fcba
+    playerturret.tint = 0x03fcba
+    powerup.destroy();
+    this.time.delayedCall(10000,function() {
+        bulletwallcollider = this.physics.add.collider(bulletgroup,walls)
         player.tint = 0xffffff;
         playerturret.tint = 0xffffff;
     
