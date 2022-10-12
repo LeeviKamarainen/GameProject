@@ -2,7 +2,7 @@
 // Help for bullet generation from this video: https://www.youtube.com/watch?v=9wvlAzKseCo
 class Bullet extends Phaser.Physics.Arcade.Sprite {
     constructor(scene,x,y) {
-        super(scene, x, y, 'bullet');
+        super(scene, x, y, 'bullet')
     }
     fire(x,y,angle) {
         this.body.reset(x,y);
@@ -14,10 +14,13 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     preUpdate(time,delta) {
         super.preUpdate(time,delta);
-        console.log()
-        if(this.body.blocked.none != true) {
+        if(this.body.blocked.none != true | this.body.touching.none != true) {
+            //reset the bullets position and make them visible
+            //essentially removing them without actually destroying the object references
+            this.body.reset(super.x,super.y);
             this.setActive(false);
             this.setVisible(false);
+
         }
     }
 }
@@ -26,8 +29,6 @@ class BulletGroup extends Phaser.Physics.Arcade.Group
 {
     constructor(scene) {
         super(scene.physics.world,scene);
-    
-
     this.createMultiple({
         classType: Bullet,
         frameQuantity: 10,
@@ -44,5 +45,30 @@ class BulletGroup extends Phaser.Physics.Arcade.Group
         }
 
     }
+
+}
+
+function bulletHit (object1,object2) {
+    //Special case for if the object hit by bullet is the player
+    if(object1 == player)
+    {
+        console.log("Player hit")
+        player.health -= 1;
+        if (player.health == -1) {
+            console.log(this.scene)
+            this.scene.restart()
+        }
+        healthbar.setTexture('Health'+player.health)
+    } else {
+        if(object1.turret!=undefined){
+        object1.body.reset(5000,5000);
+        object1.setActive(false);
+        object1.setVisible(false);
+        object1.turret.setActive(false)
+        object1.turret.setVisible(false)
+        increaseScore();
+        }
+    }
+    
 
 }

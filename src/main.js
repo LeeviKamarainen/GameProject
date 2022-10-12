@@ -4,8 +4,8 @@
 // and https://phaser.io/tutorials/making-your-first-phaser-3-game/part1
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 700,
     physics: {
         default: 'arcade',
         arcade: {
@@ -32,51 +32,91 @@ var game = new Phaser.Game(config)
   let flag = false;
   let enemygroup;
 
+  var timevar = 0;
+  var timetext;
+  var score = 0;
+  var scoreText;
+
+  let updatevar = 1; // variable to use in the update function
+  let speedupvar = 5 // variable to speed up the spawning of the enemies
   function preload () {
 
     this.load.image("tankBase", "../assets/tankBase.png", { frameWidth: 32, frameHeight: 32 });
     this.load.image("tankTurret", "../assets/tankTurret.png", { frameWidth: 32, frameHeight: 32 });
     this.load.image("bullet", "../assets/bullet.png", { frameWidth: 16, frameHeight: 16 }); 
-    this.load.image("ground", "../assets/wood.png");
+    this.load.image("ground", "../assets/Dirt 6 .png");
     this.load.image("wall", "../assets/wall.png");
-    this.load.spritesheet
+
+    //Loading of the Healthbars
+    this.load.image('Health3','../assets/Healthbar/Health6.png')
+    this.load.image('Health2','../assets/Healthbar/Health4.png')
+    this.load.image('Health1','../assets/Healthbar/Health2.png')
+    this.load.image('Health0','../assets/Healthbar/Health0.png')
+
+    //Loading of the Powerups
+
+    this.load.image('pup1','../assets/Powerup/frame 1.png')
+    this.load.image('pup2','../assets/Powerup/frame 2.png')
+    this.load.image('pup3','../assets/Powerup/frame 3.png')
+    this.load.image('pup4','../assets/Powerup/frame 4.png')
+    this.load.image('pup5','../assets/Powerup/frame 5.png')
+    this.load.image('pup6','../assets/Powerup/frame 6.png')
   }
   
   function create () {
-    this.add.image(400, 300, "ground");
+    //Representing the current scene as t on the functions (sending this)
 
-    // Initialization of the enemygroups and bulletgroups
-    bulletgroup = new BulletGroup(this)
+    //Help to get tiled background from here: http://www.netexl.com/blog/repeating-or-tiled-background-in-phaser/
+    this.add.tileSprite(0, 0, this.game.width, this.game.height, "ground");
+    scoreText = this.add.text(700, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    timeText = this.add.text(400, 16, 'Time: 0', { fontSize: '32px', fill: '#000' });
+    // Initialization of the enemygroups and the player
+    
     enemygroup = new EnemyGroup(this) 
+    
+    
     walls = this.physics.add.staticGroup();
     walls.create(400, 200, 'wall').setScale(1).refreshBody();
-    for(let i = 1; i<5; i++) {
-        for(let j=1;j<5;j++) {
+    
+    for(let i = 1; i<7; i++) {
+        for(let j=1;j<10;j++) {
         walls.create(0+j*100,0+i*100,'wall')
         }
     }
-
+    powerup = new Powerup(this);
+    powerup.create(450,450,this)
+    player = playerInit(this);
+    console.log(player)
+    console.log(player.speed)
     //creating variables for controlling the keyboard keys (cursors) and the pointer (pointer)
     cursors = this.input.keyboard.createCursorKeys();
     pointer = this.input.activePointer;
 
-    console.log(this.physics)
-    player = this.physics.add.image(400, 350, "tankBase");
-    turret = this.physics.add.image(400,350,'tankTurret');
-    
-    enemygroup.createEnemy(player.x+50,player.y+50,this)
-    
-    enemygroup.createEnemy(player.x+100,player.y+100,this)
-    player.setBounce(1);
-    player.setCollideWorldBounds(true);
+
    // this.sys.canvas.style.cursor = 'none' If you want to hide cursor
   }
   
 
 
+
+
   function update () {
+
+    updatevar +=1;
+    timevar +=1;
+    timeText.setText('Time: '+Math.round((timevar/60)*100)/100)
+
+    if (updatevar==(Math.round(speedupvar*60)+2)) {
+        
+        speedupvar = speedupvar-0.1;
+        if (speedupvar<1) {
+            speedupvar = 1
+        }
+        enemygroup.createEnemy(Math.random()*1000,Math.random()*800,this)
+        updatevar=1;
+    }
     //The angle of the players turret and your cursor
-    angle = Phaser.Math.Angle.BetweenPoints(turret,pointer)+90
+    angle = Phaser.Math.Angle.BetweenPoints(playerturret,pointer)+90
     //Movement of the turret:
     moveTurret(this,angle)
     moveTank(this)
@@ -94,8 +134,12 @@ var game = new Phaser.Game(config)
     
     enemygroup.moveEnemy(player,this)
     this.physics.collide(player,walls)
+    this.physics.add.collider(powerup,player,speedUp,null,this)
     this.physics.collide(bulletgroup,walls)
-
+    this.physics.collide(bulletgroup,player)
+    this.physics.collide(enemygroup,walls)
+    this.physics.collide(enemygroup,player)
+    this.physics.collide(enemygroup,bulletgroup)
     
    
   }
