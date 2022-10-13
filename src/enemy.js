@@ -94,7 +94,7 @@ class EnemyGroup extends Phaser.Physics.Arcade.Group
         if (dist < 400 &&  dist > 50) {
             // rotate enemy to face towards player
             // 1.5708 is approximately 90 degrees in radians and we use this to turn the enemy towards the player
-            enemy.rotation = Phaser.Math.Angle.BetweenPoints(enemy, player)+1.5708; 
+                enemy.rotation = Phaser.Math.Angle.BetweenPoints(enemy, player)+1.5708; 
             // move enemy towards player at 150px per second
             // we need to reduce the 1.5708 from the rotation to get the correct velocity
             game.physics.velocityFromRotation(enemy.rotation-1.5708, 50, enemy.body.velocity);
