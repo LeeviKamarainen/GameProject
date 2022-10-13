@@ -50,16 +50,18 @@ class BulletGroup extends Phaser.Physics.Arcade.Group
 
 function bulletHit (object1,object2) {
     //Special case for if the object hit by bullet is the player
-    if(object1 == player)
+    // flag is used for the invincible powerup
+    if(object1 == player && player.invincible == 0)
     {
         console.log("Player hit")
         player.health -= 1;
         if (player.health == -1) {
             console.log(this.scene)
-            this.scene.restart()
-        }
+            player.health = 0;
+            endGame(this)
+            }
         healthbar.setTexture('Health'+player.health)
-    } else {
+    } else if (object1 != null) {
         if(object1.turret!=undefined){
         object1.body.reset(5000,5000);
         object1.setActive(false);
@@ -69,6 +71,6 @@ function bulletHit (object1,object2) {
         increaseScore();
         }
     }
-    
+
 
 }

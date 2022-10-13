@@ -1,11 +1,11 @@
 
-
 // Lots of help from this video: https://www.youtube.com/watch?v=88DS3Z8nOdY
 // and https://phaser.io/tutorials/making-your-first-phaser-3-game/part1
 var config = {
     type: Phaser.AUTO,
     width: 1000,
     height: 700,
+    parent: 'phaser-game',
     physics: {
         default: 'arcade',
         arcade: {
@@ -19,7 +19,6 @@ var config = {
     }
 };
 
-
 var game = new Phaser.Game(config)
   
   let player;
@@ -30,13 +29,15 @@ var game = new Phaser.Game(config)
   let bulletgroup;
   let spacebar;
   let flag = false;
-  let enemygroup;
+  let enemygroup;       
   let bulletwallcollider;
 
   var timevar = 0;
   var timetext;
   var score = 0;
   var scoreText;
+
+  var gameovertext;
 
 
   let updatevar = 1; // variable to use in the update function
@@ -86,7 +87,7 @@ var game = new Phaser.Game(config)
         }
     }
     powerup = new Powerup(this);
-    powerup.create(450,450,this)
+    powerup.create(50,50,this)
     player = playerInit(this);
     console.log(player)
     console.log(player.speed)
@@ -118,6 +119,15 @@ var game = new Phaser.Game(config)
         enemygroup.createEnemy(Math.random()*1000,Math.random()*800,this)
         updatevar=1;
     }
+    if ((timevar/60)%30 == 0) {
+        console.log('New Powerup')
+        powerup = new Powerup(this);
+        let locationmat = [50,150,250,350,450,550,650,750] // Vector for spawnpoints of the powerups
+        let randlocindx = Math.floor(Math.random()*8)
+        let randlocindy = Math.floor(Math.random()*8)
+        powerup.create(locationmat[randlocindx],locationmat[randlocindy],this)  
+        this.physics.add.collider(powerup,player,randomPower,null,this)
+    }
     //The angle of the players turret and your cursor
     angle = Phaser.Math.Angle.BetweenPoints(playerturret,pointer)+90
     //Movement of the turret:
@@ -138,7 +148,6 @@ var game = new Phaser.Game(config)
     enemygroup.moveEnemy(player,this)
     this.physics.collide(player,walls)
     
-    this.physics.add.collider(powerup,player,pierceShot,null,this)
     this.physics.collide(bulletgroup,player)
     this.physics.collide(enemygroup,walls)
     this.physics.collide(enemygroup,player)

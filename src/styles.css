@@ -1,0 +1,21 @@
+body {
+    font-family: sans-serif;
+  }
+  
+
+.game-window {
+    position: absolute;
+    left: 20%;
+    size: 50%;
+  }
+.phaser-game {
+    position: center;
+    left: 50%;
+  }
+
+
+.restartbutton {
+    position: relative;
+    width: 200px;
+    left: 40%;
+}

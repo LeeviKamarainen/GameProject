@@ -26,33 +26,70 @@ class Powerup extends Phaser.Physics.Arcade.Sprite
     }
 }
 
-function speedUp (powerup,player) {
-    currenttime = this.time.now;
+function randomPower(powerup,player) {
+    let randindex = Math.floor(Math.random()*4)
+    console.log(this)
+    if(randindex == 1) {
+        console.log("speedup")
+        speedUp(powerup,player,this)
+    }
+    else if (randindex == 2) {
+        
+        console.log("pierce")
+        pierceShot(powerup,player,this)
+    }
+    else if (randindex == 3) {
+        
+        console.log("invincible")
+        invinciblePower(powerup,player,this)
+    }
+
+}
+
+
+function speedUp (powerup,player,t) {
+    currenttime = t.time.now;
     console.log(this)
     player.speed = 200;
     player.tint = 0x036bfc
     playerturret.tint = 0x036bfc
     powerup.destroy();
-    this.time.delayedCall(5000,function() {player.speed = 100
+    t.time.delayedCall(5000,function() {player.speed = 100
         player.tint = 0xffffff;
         playerturret.tint = 0xffffff;
     
-    }, null,this) //set speed back to original after 5 seconds
+    }, null,t) //set speed back to original after 5 seconds
 }
 
-function pierceShot (powerup,player) {
-    this.physics.world.removeCollider(bulletwallcollider) // remove the collision checker between walls and player bullets 
+function pierceShot (powerup,player,t) {
+    t.physics.world.removeCollider(bulletwallcollider) // remove the collision checker between walls and player bullets 
     player.tint = 0x03fcba
     playerturret.tint = 0x03fcba
     powerup.destroy();
-    this.time.delayedCall(10000,function() {
-        bulletwallcollider = this.physics.add.collider(bulletgroup,walls)
+    t.time.delayedCall(10000,function() {
+        bulletwallcollider = t.physics.add.collider(bulletgroup,walls)
         player.tint = 0xffffff;
         playerturret.tint = 0xffffff;
     
-    }, null,this) //set speed back to original after 5 seconds
+    }, null,t) //set shots back to original after 10 seconds
 }
 
+function invinciblePower(powerup, player,t) {
+     // remove the collision checker between walls and player bullets 
+    player.tint = 0x55566b
+    playerturret.tint = 0x55566b
+    powerup.destroy();
+    player.invincible=1;
+    t.time.delayedCall(10000,function() {
+        player.invincible = 0;
+        player.tint = 0xffffff;
+        playerturret.tint = 0xffffff;
+    
+    }, null,t) //set speed back to original after 5 seconds
+
+
+
+}
 /*function powerUpAnimation (t) {
     t.anims.create({
         key: 'powerup',

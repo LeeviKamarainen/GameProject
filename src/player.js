@@ -6,6 +6,8 @@ function playerInit (t) {
     player = t.physics.add.sprite(400, 350, "tankBase");
     player.health = 3;
     player.speed = 100;
+    player.invincible = 0;
+
     playerturret = t.physics.add.sprite(400,350,'tankTurret');
     healthbar = t.physics.add.image(player.x,player.y-50,'Health3')
 

@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Game</title>
+    <link rel="stylesheet" href="src/styles.css">
     <script type="text/javascript" src="src/phaser.js"></script>
     <script type="text/javascript" src="src/phaser.min.js"></script>
 </head>
 <body>
-<div>
-    <script type="text/javascript" src="src/main.js"></script>
-    <script type="text/javascript" src="src/bullets.js"></script>
-    <script type="text/javascript" src="src/enemy.js"></script>
-    <script type="text/javascript" src="src/playerMovement.js"></script>
-    <script type="text/javascript" src="src/player.js"></script>
-    <script type="text/javascript" src="src/score.js"></script>
-    <script type="text/javascript" src="src/powerup.js"></script>
+<div id = 'gamewindow', class = 'game-window'> 
+    <div id ="phaser-game", class = 'phaser-game'>
+        <script type="text/javascript" src="src/main.js"></script>
+        <script type="text/javascript" src="src/bullets.js"></script>
+        <script type="text/javascript" src="src/enemy.js"></script>
+        <script type="text/javascript" src="src/playerMovement.js"></script>
+        <script type="text/javascript" src="src/player.js"></script>
+        <script type="text/javascript" src="src/score.js"></script>
+        <script type="text/javascript" src="src/powerup.js"></script>
+    </div>
+    <button id="restartbutton" class = 'restartbutton'>Restart Game</button>
 </div>
-
 </body>
 </html>
