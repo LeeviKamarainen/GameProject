@@ -71,7 +71,7 @@ class EnemyGroup extends Phaser.Physics.Arcade.Group
 
    this.createMultiple({
         classType: Enemy,
-        frameQuantity: 1,
+        frameQuantity: 50,
         active: false,
         visible: false,
         key: 'tankBase'
