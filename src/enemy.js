@@ -14,6 +14,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         console.log(player)
         this.scene.physics.add.collider(this.bulletgroup,player,bulletHit,null,this.scene)
         this.scene.physics.add.collider(this.bulletgroup,walls)
+        this.scene.physics.add.collider(this.bulletgroup,trunk)
         this.tint = 0xda2525
         this.setActive(true);
         this.setVisible(true);

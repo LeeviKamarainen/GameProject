@@ -9,7 +9,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false
+            debug: true
         }
     },
     scene: {
@@ -49,7 +49,8 @@ var game = new Phaser.Game(config)
     this.load.image("bullet", "../assets/bullet.png", { frameWidth: 16, frameHeight: 16 }); 
     this.load.image("ground", "../assets/Dirt 6 .png");
     this.load.image("wall", "../assets/wall.png");
-
+    this.load.image('trunk','../assets/woodlong.png')
+    
     //Loading of the Healthbars
     this.load.image('Health3','../assets/Healthbar/Health6.png')
     this.load.image('Health2','../assets/Healthbar/Health4.png')
@@ -68,6 +69,7 @@ var game = new Phaser.Game(config)
 
     //Loading of the sounds:
     this.load.audio('shot','../assets/Sounds/gun_fire.wav')
+    this.load.audio('explosion','../assets/Sounds/explosion.wav') // https://opengameart.org/content/explosion-0
 }
   
 
@@ -88,22 +90,27 @@ var game = new Phaser.Game(config)
     
     enemygroup = new EnemyGroup(this) 
     
-    
+    //Create boxes
     walls = this.physics.add.staticGroup();
-    walls.create(400, 200, 'wall').setScale(1).refreshBody();
-    
     for(let i = 1; i<7; i++) {
         for(let j=1;j<10;j++) {
+            if((j == 4 | j == 5) ) {
+                continue;
+            }
         walls.create(0+j*100,0+i*100,'wall')
         }
     }
+
+    //Create rotating trunk
+    trunk = this.physics.add.sprite(450, 350, "trunk");
+    trunk.setScale(0.2)
+    trunk.setVelocity(0,50)
     player = playerInit(this);
     console.log(player)
     console.log(player.speed)
     //creating variables for controlling the keyboard keys (cursors) and the pointer (pointer)
     cursors = this.input.keyboard.createCursorKeys();
     pointer = this.input.activePointer;
-
     bulletwallcollider = this.physics.add.collider(bulletgroup,walls)
 
    // this.sys.canvas.style.cursor = 'none' If you want to hide cursor
@@ -145,6 +152,15 @@ var game = new Phaser.Game(config)
     moveTurret(this,angle)
     moveTank(this)
    
+    //Movement of the trunk
+    if(trunk.y<50) {
+        trunk.setVelocity(0,70)
+    }else if(trunk.y>650) {
+        trunk.setVelocity(0,-70)
+    }
+    
+    trunk.x = 450
+
     //When you click once the turret shoots once, the flag controls that the turret wont shoot continously when the left click is pressed down
     if(pointer.primaryDown) {
         if(flag==false) {
@@ -159,6 +175,11 @@ var game = new Phaser.Game(config)
     enemygroup.moveEnemy(player,this)
     this.physics.collide(player,walls)
     
+    this.physics.collide(player,trunk)
+    this.physics.collide(trunk,bulletgroup)
+    this.physics.collide(enemygroup,trunk)
+
+    this.physics.collide(player,enemygroup)
     this.physics.collide(bulletgroup,player)
     this.physics.collide(enemygroup,walls)
     this.physics.collide(enemygroup,player)

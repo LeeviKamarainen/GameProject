@@ -63,6 +63,9 @@ function bulletHit (object1,object2) {
         healthbar.setTexture('Health'+player.health)
     } else if (object1 != null) {
         if(object1.turret!=undefined){
+            
+        var explosionSound = this.scene.sound.add('explosion',{volume: 0.5});
+        explosionSound.play()
         object1.body.reset(5000,5000);
         object1.setActive(false);
         object1.setVisible(false);

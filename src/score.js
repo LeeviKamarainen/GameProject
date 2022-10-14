@@ -30,14 +30,22 @@ function setLeaderboard(t) {
 
     var leaderboardlist = document.getElementById('leaderboardlist');
     leaderboardlist.innerHTML = ''
+    if((localStorage.hasOwnProperty('leaderboard2'))) {
     var leaderboard = JSON.parse(localStorage.getItem('leaderboard2'))
 // help for sorting: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
     var sortedleaderboard = leaderboard.sort((a,b) => b.score-a.score)
     //Help for list element creating: https://stackoverflow.com/questions/17773938/add-a-list-item-through-javascript
     for(let i = 0;i < 5; i++) {
+        if(i>=sortedleaderboard.length){ //break if the length is not over 5
+            break
+        }
+        if(sortedleaderboard[i].score == -999) { //continue next iteration if the score is -999 (the initialization JSON object)
+            continue
+        }
         var entry = document.createElement('li');
         entry.appendChild(document.createTextNode(sortedleaderboard[i].name+' '+sortedleaderboard[i].score))
         leaderboardlist.appendChild(entry)
+        }
     }
 
 }
