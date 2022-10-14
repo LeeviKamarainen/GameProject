@@ -3,7 +3,7 @@
 // and https://phaser.io/tutorials/making-your-first-phaser-3-game/part1
 var config = {
     type: Phaser.AUTO,
-    width: 1000,
+    width: 1000, 
     height: 700,
     parent: 'phaser-game',
     physics: {
@@ -20,7 +20,7 @@ var config = {
 };
 
 var game = new Phaser.Game(config)
-  
+
   let player;
   let walls;
   let turret;
@@ -36,10 +36,10 @@ var game = new Phaser.Game(config)
   var timetext;
   var score = 0;
   var scoreText;
+  var startPausedFlag = 0;
 
   var gameovertext;
-
-
+  var initLeaderboard = {name}
   let updatevar = 1; // variable to use in the update function
   let speedupvar = 5 // variable to speed up the spawning of the enemies
   function preload () {
@@ -64,11 +64,22 @@ var game = new Phaser.Game(config)
     this.load.image('pup4','../assets/Powerup/frame 4.png')
     this.load.image('pup5','../assets/Powerup/frame 5.png')
     this.load.image('pup6','../assets/Powerup/frame 6.png')
-  }
   
-  function create () {
-    //Representing the current scene as t on the functions (sending this)
 
+    //Loading of the sounds:
+    this.load.audio('shot','../assets/Sounds/gun_fire.wav')
+}
+  
+
+  function create () {
+    
+    if(startPausedFlag == 0) {
+        this.scene.pause();
+    }
+    let restartButton = document.getElementById('restartbutton')
+    restartButton.addEventListener("click",restartGame)
+    setLeaderboard(this)
+    //Representing the current scene as t on the functions (sending this)
     //Help to get tiled background from here: http://www.netexl.com/blog/repeating-or-tiled-background-in-phaser/
     this.add.tileSprite(0, 0, this.game.width, this.game.height, "ground");
     scoreText = this.add.text(700, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
@@ -86,8 +97,6 @@ var game = new Phaser.Game(config)
         walls.create(0+j*100,0+i*100,'wall')
         }
     }
-    powerup = new Powerup(this);
-    powerup.create(50,50,this)
     player = playerInit(this);
     console.log(player)
     console.log(player.speed)
@@ -106,26 +115,28 @@ var game = new Phaser.Game(config)
 
   function update () {
 
-    updatevar +=1;
+    updatevar +=1; // The game updates 60 times per second, meaning that when we divide the update var by 60, we get one update per second.
     timevar +=1;
     timeText.setText('Time: '+Math.round((timevar/60)*100)/100)
 
-    if (updatevar==(Math.round(speedupvar*60)+2)) {
+    if (updatevar==(Math.round(speedupvar*60)+2)) { //Handles how often enemies spawn
         
-        speedupvar = speedupvar-0.1;
+        speedupvar = speedupvar-0.2; //Speedupvar is used to speed up the spawning of enemies
         if (speedupvar<1) {
-            speedupvar = 1
+            speedupvar = 1 //At the end enemies spawn once per second
         }
-        enemygroup.createEnemy(Math.random()*1000,Math.random()*800,this)
-        updatevar=1;
+        spawnlocation = randomGridLocation();
+        enemygroup.createEnemy(spawnlocation[0],spawnlocation[1],this)
+        updatevar=1; //Reset the updatevar
     }
-    if ((timevar/60)%30 == 0) {
-        console.log('New Powerup')
+    if ((timevar/60)%5== 0) {
         powerup = new Powerup(this);
-        let locationmat = [50,150,250,350,450,550,650,750] // Vector for spawnpoints of the powerups
-        let randlocindx = Math.floor(Math.random()*8)
-        let randlocindy = Math.floor(Math.random()*8)
-        powerup.create(locationmat[randlocindx],locationmat[randlocindy],this)  
+        let randindex = Math.floor(Math.random()*3)+1
+        powerup.powerupind = randindex;
+        console.log(powerup.powerupind)
+        spawnlocation = randomGridLocation();
+        console.log(spawnlocation)
+        powerup.create(spawnlocation[0],spawnlocation[1],this)  
         this.physics.add.collider(powerup,player,randomPower,null,this)
     }
     //The angle of the players turret and your cursor
@@ -153,7 +164,15 @@ var game = new Phaser.Game(config)
     this.physics.collide(enemygroup,player)
     this.physics.collide(enemygroup,bulletgroup)
     
-   
+
+  }
+
+  function randomGridLocation() {
+    let locationmat = [50,150,250,350,450,550,650,750] // Vector for spawnpoints of the powerups
+    let randlocindx = Math.floor(Math.random()*8)
+    let randlocindy = Math.floor(Math.random()*8)
+    let spawnlocation = [locationmat[randlocindx],locationmat[randlocindy]]
+    return spawnlocation;
   }
 
 

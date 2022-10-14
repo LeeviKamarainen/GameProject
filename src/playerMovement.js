@@ -19,6 +19,8 @@ function moveTank (t) {
   }
 
   function shootBullet (t,angle) {
+    var shootSound = t.sound.add('shot',{volume: 0.5});
+    shootSound.play()
     bulletgroup.fireBullet(player.x,player.y,angle)
   }
 

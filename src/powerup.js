@@ -17,6 +17,15 @@ class Powerup extends Phaser.Physics.Arcade.Sprite
         this.y = y;
         this.setActive(true);
         this.setVisible(true);
+        if (this.powerupind == 1) {
+            this.tint = 0x036bfc;
+        } else if (this.powerupind == 2) { 
+            this.tint = 0x03fcba;
+        }
+        else if (this.powerupind == 3) {
+            this.tint = 0x55566b;
+         }
+
         this.body.setCollideWorldBounds(true);
     }
     preUpdate(time,delta) {
@@ -27,8 +36,8 @@ class Powerup extends Phaser.Physics.Arcade.Sprite
 }
 
 function randomPower(powerup,player) {
-    let randindex = Math.floor(Math.random()*4)
-    console.log(this)
+    let randindex = powerup.powerupind;
+    console.log(randindex)
     if(randindex == 1) {
         console.log("speedup")
         speedUp(powerup,player,this)
@@ -39,7 +48,6 @@ function randomPower(powerup,player) {
         pierceShot(powerup,player,this)
     }
     else if (randindex == 3) {
-        
         console.log("invincible")
         invinciblePower(powerup,player,this)
     }

@@ -1,21 +1,76 @@
 body {
     font-family: sans-serif;
+    background-color: rgb(41, 38, 28);
   }
   
 
 .game-window {
-    position: absolute;
+    position: relative;
+    top: 20%;
     left: 20%;
-    size: 50%;
+    height: 1000px;
+    width: 1000px;
   }
 .phaser-game {
-    position: center;
-    left: 50%;
+   position: absolute;
+   top: 20%
   }
-
-
-.restartbutton {
-    position: relative;
-    width: 200px;
-    left: 40%;
+  header{
+    font-size: 50px;
+    color:rgb(199, 165, 54);
+    position:absolute ;
+    top: -10%;
+  }
+.information {
+  position: absolute;
+  background-color: #4CAF50;
+  font-size: 30px;
+  color: rgb(0, 0, 0);
+  width: 500px;
+  top: 0%;
+  right: -50%;
+  height: 700px;
 }
+
+#leaderboard {
+  background-color: #c5cf39;
+  text-align:center;
+  border-radius: 20px;
+  position:relative;
+  bottom: 30px;
+  height: 260px;
+  width: 500px;
+}
+#inputname {
+  background-color: #449447;
+  width: 207px;
+   border: none;
+    position: absolute;
+    background-color: #00ff08;
+    border-radius: 12px;
+    color: rgb(44, 38, 38);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    bottom: -50px;
+    left: 0%;
+}
+input {
+  width: 100px;
+}
+.restartbutton {
+    border: none;
+    position: absolute;
+    background-color: #4CAF50;
+    border-radius: 12px;
+    color: rgb(44, 38, 38);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 200px;
+    bottom: -50px;
+    left: 30%;
+}
+

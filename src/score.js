@@ -43,6 +43,7 @@ function setLeaderboard(t) {
 }
 
 function restartGame() {
+    startPausedFlag = 1;
     score = 0;
     timevar = 0;
     speedupvar = 5;
