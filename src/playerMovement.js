@@ -15,11 +15,11 @@ function moveTank (t) {
     } else {
         player.setAngularVelocity(0)
     }
-    healthbar.setPosition(player.x,player.y-50)
+    healthbar.setPosition(player.x,player.y-50) //Make the healthbar follow above the player
   }
 
   function shootBullet (t,angle) {
-    var shootSound = t.sound.add('shot',{volume: 0.5});
+    var shootSound = t.sound.add('shot',{volume: 0.5}); //Play shoot sound
     shootSound.play()
     bulletgroup.fireBullet(player.x,player.y,angle)
   }

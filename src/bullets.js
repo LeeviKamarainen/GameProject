@@ -17,9 +17,11 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         if(this.body.blocked.none != true | this.body.touching.none != true) {
             //reset the bullets position and make them visible
             //essentially removing them without actually destroying the object references
-            this.body.reset(super.x,super.y);
+            this.body.reset(1000,800);
             this.setActive(false);
             this.setVisible(false);
+            var explosionSound = game.scene.scenes[0].sound.add('woodhit',{volume: 0.5});
+            explosionSound.play()
 
         }
     }
@@ -50,8 +52,8 @@ class BulletGroup extends Phaser.Physics.Arcade.Group
 
 function bulletHit (object1,object2) {
     //Special case for if the object hit by bullet is the player
-    // flag is used for the invincible powerup
-    if(object1 == player && player.invincible == 0)
+    // player.invincible is used for the invincible powerup
+    if(object1 == player && player.invincible == 0 && object2.active == true)
     {
         console.log("Player hit")
         player.health -= 1;
@@ -62,12 +64,13 @@ function bulletHit (object1,object2) {
             }
         healthbar.setTexture('Health'+player.health)
     } else if (object1 != null) {
+        var explosionSound
         if(object1.turret!=undefined){
-            
-        var explosionSound = this.scene.sound.add('explosion',{volume: 0.5});
+        explosionSound = this.scene.sound.add('explosion',{volume: 0.5}); //play sound
         explosionSound.play()
-        object1.body.reset(5000,5000);
-        object1.setActive(false);
+        object1.body.setCollideWorldBounds(false);
+        object1.body.reset(600,600);
+        object1.setActive(false); //'Destroy' the object which was hit
         object1.setVisible(false);
         object1.turret.setActive(false)
         object1.turret.setVisible(false)

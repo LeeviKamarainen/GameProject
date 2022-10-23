@@ -6,31 +6,39 @@ body {
 
 .game-window {
     position: relative;
-    top: 20%;
+    top: 0;
     left: 20%;
-    height: 1000px;
-    width: 1000px;
+    height: 70%;
+    width: 70%;
   }
+
 .phaser-game {
    position: absolute;
-   top: 20%
+   top: 20%;
+   height:90%;  
+  width: 70%;
   }
+  
   header{
     font-size: 50px;
     color:rgb(199, 165, 54);
     position:absolute ;
     top: -10%;
   }
+  
 .information {
   position: absolute;
   background-color: #4CAF50;
+  word-wrap: break-word;
+  overflow: hidden;
   font-size: 30px;
   color: rgb(0, 0, 0);
-  width: 500px;
+  width: 100%;
   top: 0%;
-  right: -50%;
-  height: 700px;
+  right: 0%;
+  height: 100%;
 }
+
 
 #leaderboard {
   background-color: #c5cf39;
@@ -38,39 +46,71 @@ body {
   border-radius: 20px;
   position:relative;
   bottom: 30px;
-  height: 260px;
-  width: 500px;
+  max-height: 40%;
+  width: 40%;
+  left: 30%
 }
+
+.bottombar {
+  position: absolute;
+  width: 95%;
+  bottom: -10%;
+  background-color: #252925;
+  border-radius: 12px;
+  color: rgb(44, 38, 38);
+  height: 5%;
+  padding: 15px 32px;
+}
+
 #inputname {
-  background-color: #449447;
-  width: 207px;
+  background-color: #3d423d;
+  width: 20%;
    border: none;
     position: absolute;
-    background-color: #00ff08;
+    background-color: #3d423d;
     border-radius: 12px;
-    color: rgb(44, 38, 38);
-    padding: 15px 32px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    height: 100%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    bottom: -50px;
+    bottom: 0%;
     left: 0%;
 }
 input {
-  width: 100px;
+  width: 90%;
 }
 .restartbutton {
-    border: none;
     position: absolute;
-    background-color: #4CAF50;
+    background-color: #3d423d;
     border-radius: 12px;
-    color: rgb(44, 38, 38);
+    color: rgb(0, 0, 0);
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    width: 200px;
-    bottom: -50px;
-    left: 30%;
+    height: 100%;
+    width: 20%;
+    bottom: 0%;
+    left: 40%;
 }
 
+.pausebutton {
+  position: absolute;
+  background-color: #3d423d;
+  border-radius: 12px;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  height: 100%;
+  width: 20%;
+  bottom: 0%;
+  left: 80%;
+}
+
+button:hover {
+  background-color: #4CAF50; 
+  color: white;
+}

@@ -9,41 +9,46 @@
 <body>
 <div id = 'gamewindow', class = 'game-window'> 
     <div id ="phaser-game", class = 'phaser-game'>
-        
-    <header>Tank Game</header>
         <script type="text/javascript" src="src/main.js"></script>
         <script type="text/javascript" src="src/bullets.js"></script>
         <script type="text/javascript" src="src/enemy.js"></script>
         <script type="text/javascript" src="src/playerMovement.js"></script>
         <script type="text/javascript" src="src/player.js"></script>
-        <script type="text/javascript" src="src/score.js"></script>
+        <script type="text/javascript" src="src/UI.js"></script>
         <script type="text/javascript" src="src/powerup.js"></script>
-        
+    
+    
+    <header>Tank Game</header>
     <div id="information" class="information">
         <p> Instructions for the game:</p>
-        <ul>
+        <ul id="informationlist">
             <li> Move mouse to control the turret</li>
             <li> Use left and right arrow keys to turn the tank</li>
             <li> Use up and down arrow keys to move forwards and backwards</li>
-            <li> Use left click to shoot</li>
-            <li> Collect powerups to gain special effects (speed up, piercing shot, invincibility)</li>
-            <li> Try to survive as long as  you can!</li>
+            <li> Use left click to shoot. You get points when you hit enemies.</li>
+            <li> Collect powerups to gain special effects (speed up, piercing shot, invincibility, health)</li>
+            <li> Watch out for the red enemy tanks!</li>
+            <li> Try to survive and get as much points as you can!</li>
         </ul>
         <div id="leaderboard">
         <p>Leaderboard (Top 5):</p>
         <ol id = 'leaderboardlist'>
-            <li>TEST</li>
         </ol>
-    </div>
+        </div>
     </div>
         
 
+    <div id="bottombar" class="bottombar">
     <button id="restartbutton" class = 'restartbutton'>Start Game</button>
     <form id="inputname">
         <label for="name">Player name:</label>
-        <input type="text" id="name" value="Default dude">
+        <input type="text" id="name" value="Default name">
     </form>
+    
+    <button id="pausebutton" class = 'pausebutton'>Pause Game</button>
     </div>
+</div>    
+</div>
 </div>
 </body>
 </html>

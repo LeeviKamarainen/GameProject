@@ -10,12 +10,17 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     }
 
     create(x,y,sc) {
-        this.body.reset(x+Math.random()*50,y+Math.random()*50);
-        console.log(player)
+        //Random spawnpoint
+        let spawnpoint = randomGridLocation()
+        this.body.reset(x,y);
+
+        //Colliders for the enemy bullets and world (walls, player, trunks)
         this.scene.physics.add.collider(this.bulletgroup,player,bulletHit,null,this.scene)
         this.scene.physics.add.collider(this.bulletgroup,walls)
         this.scene.physics.add.collider(this.bulletgroup,trunk)
-        this.tint = 0xda2525
+
+
+        this.tint = 0xda2525 //red tint
         this.setActive(true);
         this.setVisible(true);
         this.body.setCollideWorldBounds(true);
@@ -35,7 +40,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         
         this.timer += delta;
         while (this.timer > 1000) {
-            //1.0472 is 60 degrees
+            //1.0472 is approximately 60 degrees
             this.bulletgroup.fireBullet(this.x,this.y,enemyTurretangle-1.0472)
             this.timer -= 1000;
         }
@@ -70,18 +75,18 @@ class EnemyGroup extends Phaser.Physics.Arcade.Group
         super(scene.physics.world,scene);
     
 
-   this.createMultiple({
+   this.createMultiple({ //Create multiple enemies, max amount at one time is 50
         classType: Enemy,
         frameQuantity: 50,
         active: false,
         visible: false,
-        key: 'tankBase'
+        key: 'tankBase',
+        setXY:[1000, 800]
     })
     }  
 
     createEnemy(x,y,sc) {
         const enemy = this.getFirstDead(false)
-
         if(enemy) {
             enemy.create(x,y,sc)
         }
@@ -89,10 +94,10 @@ class EnemyGroup extends Phaser.Physics.Arcade.Group
 
     moveEnemy(player,game) {
         const enemies= this;
-       for(let i = 0; i<enemies.children.entries.length;i++) {
+       for(let i = 0; i<enemies.children.entries.length;i++) { // loop to íterate through the enemy groups children to control the movement of each of them.
         let enemy = enemies.children.entries[i]
         let dist = Phaser.Math.Distance.BetweenPoints(enemy, player)
-        if (dist < 400 &&  dist > 50) {
+        if ((dist < 400 &&  dist > 50) && enemy.active == true) {
             // rotate enemy to face towards player
             // 1.5708 is approximately 90 degrees in radians and we use this to turn the enemy towards the player
                 enemy.rotation = Phaser.Math.Angle.BetweenPoints(enemy, player)+1.5708; 
