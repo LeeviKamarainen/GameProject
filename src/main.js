@@ -49,34 +49,34 @@ var game = new Phaser.Game(config)
   function preload () {
 
     //Sprite assets
-    this.load.image("tankBase", "https://leevikamarainen.github.io/assets/tankBase.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.image("tankTurret", "https://leevikamarainen.github.io/assets/tankTurret.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.image("bullet", "https://leevikamarainen.github.io/assets/bullet.png", { frameWidth: 16, frameHeight: 16 }); 
-    this.load.image("ground", "https://leevikamarainen.github.io/assets/Dirt 6 .png");
-    this.load.image("wall", "https://leevikamarainen.github.io/assets/wall.png");
-    this.load.image('trunk','https://leevikamarainen.github.io/assets/woodlong.png')
+    this.load.image("tankBase", "https://leevikamarainen.github.io/GameProject/assets/tankBase.png", { frameWidth: 32, frameHeight: 32 });
+    this.load.image("tankTurret", "https://leevikamarainen.github.io/GameProject/assets/tankTurret.png", { frameWidth: 32, frameHeight: 32 });
+    this.load.image("bullet", "https://leevikamarainen.github.io/GameProject/assets/bullet.png", { frameWidth: 16, frameHeight: 16 }); 
+    this.load.image("ground", "https://leevikamarainen.github.io/GameProject/assets/Dirt 6 .png");
+    this.load.image("wall", "https://leevikamarainen.github.io/GameProject/assets/wall.png");
+    this.load.image('trunk','https://leevikamarainen.github.io/GameProject/assets/woodlong.png')
     
     //Loading of the Healthbars
-    this.load.image('Health3','https://leevikamarainen.github.io/assets/Healthbar/Health6.png')
-    this.load.image('Health2','https://leevikamarainen.github.io/assets/Healthbar/Health4.png')
-    this.load.image('Health1','https://leevikamarainen.github.io/assets/Healthbar/Health2.png')
-    this.load.image('Health0','https://leevikamarainen.github.io/assets/Healthbar/Health0.png')
-    this.load.image('Healthsingle','https://leevikamarainen.github.io/assets/Healthbar/Healthsingle.png')
+    this.load.image('Health3','https://leevikamarainen.github.io/GameProject/assets/Healthbar/Health6.png')
+    this.load.image('Health2','https://leevikamarainen.github.io/GameProject/assets/Healthbar/Health4.png')
+    this.load.image('Health1','https://leevikamarainen.github.io/GameProject/assets/Healthbar/Health2.png')
+    this.load.image('Health0','https://leevikamarainen.github.io/GameProject/assets/Healthbar/Health0.png')
+    this.load.image('Healthsingle','https://leevikamarainen.github.io/GameProject/assets/Healthbar/Healthsingle.png')
     
     //Loading of the Powerups
-    this.load.image('pup1','https://leevikamarainen.github.io/assets/Powerup/frame 1.png')
-    this.load.image('pup2','https://leevikamarainen.github.io/assets/Powerup/frame 2.png')
-    this.load.image('pup3','https://leevikamarainen.github.io/assets/Powerup/frame 3.png')
-    this.load.image('pup4','https://leevikamarainen.github.io/assets/Powerup/frame 4.png')
-    this.load.image('pup5','https://leevikamarainen.github.io/assets/Powerup/frame 5.png')
-    this.load.image('pup6','https://leevikamarainen.github.io/assets/Powerup/frame 6.png')
+    this.load.image('pup1','https://leevikamarainen.github.io/GameProject/assets/Powerup/frame 1.png')
+    this.load.image('pup2','https://leevikamarainen.github.io/GameProject/assets/Powerup/frame 2.png')
+    this.load.image('pup3','https://leevikamarainen.github.io/GameProject/assets/Powerup/frame 3.png')
+    this.load.image('pup4','https://leevikamarainen.github.io/GameProject/assets/Powerup/frame 4.png')
+    this.load.image('pup5','https://leevikamarainen.github.io/GameProject/assets/Powerup/frame 5.png')
+    this.load.image('pup6','https://leevikamarainen.github.io/GameProject/assets/Powerup/frame 6.png')
   
 
     //Loading of the sounds:
-    this.load.audio('shot','https://leevikamarainen.github.io/assets/Sounds/gun_fire.wav')
-    this.load.audio('explosion','https://leevikamarainen.github.io/assets/Sounds/explosion.wav') // https://opengameart.org/content/explosion-0
-    this.load.audio('woodhit','https://leevikamarainen.github.io/assets/Sounds/424911-impactshort78.wav') //https://opengameart.org/content/short-impact
-    this.load.audio('music','https://leevikamarainen.github.io/assets/Sounds/BossMain.wav') 
+    this.load.audio('shot','https://leevikamarainen.github.io/GameProject/assets/Sounds/gun_fire.wav')
+    this.load.audio('explosion','https://leevikamarainen.github.io/GameProject/assets/Sounds/explosion.wav') // https://opengameart.org/content/explosion-0
+    this.load.audio('woodhit','https://leevikamarainen.github.io/GameProject/assets/Sounds/424911-impactshort78.wav') //https://opengameart.org/content/short-impact
+    this.load.audio('music','https://leevikamarainen.github.io/GameProject/assets/Sounds/BossMain.wav') 
 
 }
   
