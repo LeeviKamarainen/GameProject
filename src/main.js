@@ -49,34 +49,34 @@ var game = new Phaser.Game(config)
   function preload () {
 
     //Sprite assets
-    this.load.image("tankBase", "./assets/tankBase.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.image("tankTurret", "./assets/tankTurret.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.image("bullet", "./assets/bullet.png", { frameWidth: 16, frameHeight: 16 }); 
-    this.load.image("ground", "./assets/Dirt 6 .png");
-    this.load.image("wall", "./assets/wall.png");
-    this.load.image('trunk','./assets/woodlong.png')
+    this.load.image("tankBase", "https://leevikamarainen.github.io/assets/tankBase.png", { frameWidth: 32, frameHeight: 32 });
+    this.load.image("tankTurret", "https://leevikamarainen.github.io/assets/tankTurret.png", { frameWidth: 32, frameHeight: 32 });
+    this.load.image("bullet", "https://leevikamarainen.github.io/assets/bullet.png", { frameWidth: 16, frameHeight: 16 }); 
+    this.load.image("ground", "https://leevikamarainen.github.io/assets/Dirt 6 .png");
+    this.load.image("wall", "https://leevikamarainen.github.io/assets/wall.png");
+    this.load.image('trunk','https://leevikamarainen.github.io/assets/woodlong.png')
     
     //Loading of the Healthbars
-    this.load.image('Health3','./assets/Healthbar/Health6.png')
-    this.load.image('Health2','./assets/Healthbar/Health4.png')
-    this.load.image('Health1','./assets/Healthbar/Health2.png')
-    this.load.image('Health0','./assets/Healthbar/Health0.png')
-    this.load.image('Healthsingle','./assets/Healthbar/Healthsingle.png')
+    this.load.image('Health3','https://leevikamarainen.github.io/assets/Healthbar/Health6.png')
+    this.load.image('Health2','https://leevikamarainen.github.io/assets/Healthbar/Health4.png')
+    this.load.image('Health1','https://leevikamarainen.github.io/assets/Healthbar/Health2.png')
+    this.load.image('Health0','https://leevikamarainen.github.io/assets/Healthbar/Health0.png')
+    this.load.image('Healthsingle','https://leevikamarainen.github.io/assets/Healthbar/Healthsingle.png')
     
     //Loading of the Powerups
-    this.load.image('pup1','./assets/Powerup/frame 1.png')
-    this.load.image('pup2','./assets/Powerup/frame 2.png')
-    this.load.image('pup3','./assets/Powerup/frame 3.png')
-    this.load.image('pup4','./assets/Powerup/frame 4.png')
-    this.load.image('pup5','./assets/Powerup/frame 5.png')
-    this.load.image('pup6','./assets/Powerup/frame 6.png')
+    this.load.image('pup1','https://leevikamarainen.github.io/assets/Powerup/frame 1.png')
+    this.load.image('pup2','https://leevikamarainen.github.io/assets/Powerup/frame 2.png')
+    this.load.image('pup3','https://leevikamarainen.github.io/assets/Powerup/frame 3.png')
+    this.load.image('pup4','https://leevikamarainen.github.io/assets/Powerup/frame 4.png')
+    this.load.image('pup5','https://leevikamarainen.github.io/assets/Powerup/frame 5.png')
+    this.load.image('pup6','https://leevikamarainen.github.io/assets/Powerup/frame 6.png')
   
 
     //Loading of the sounds:
-    this.load.audio('shot','./assets/Sounds/gun_fire.wav')
-    this.load.audio('explosion','./assets/Sounds/explosion.wav') // https://opengameart.org/content/explosion-0
-    this.load.audio('woodhit','./assets/Sounds/424911-impactshort78.wav') //https://opengameart.org/content/short-impact
-    this.load.audio('music','./assets/Sounds/BossMain.wav') 
+    this.load.audio('shot','https://leevikamarainen.github.io/assets/Sounds/gun_fire.wav')
+    this.load.audio('explosion','https://leevikamarainen.github.io/assets/Sounds/explosion.wav') // https://opengameart.org/content/explosion-0
+    this.load.audio('woodhit','https://leevikamarainen.github.io/assets/Sounds/424911-impactshort78.wav') //https://opengameart.org/content/short-impact
+    this.load.audio('music','https://leevikamarainen.github.io/assets/Sounds/BossMain.wav') 
 
 }
   
